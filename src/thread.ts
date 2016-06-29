@@ -1,7 +1,12 @@
 import {EventEmitter} from "events";
 
-interface MessageEvent {
+interface NewMessageEvent {
   ev: "NEW_MESSAGE";
+  value: string;
+}
+
+interface CreateMessageEvent {
+  ev: "CREATE_MESSAGE";
   value: string;
 }
 
@@ -13,7 +18,7 @@ class Thread extends EventEmitter {
     super();
     this.connetion.onmessage = (event) => {
       try {
-        const message = JSON.parse(event.data) as MessageEvent;
+        const message = JSON.parse(event.data) as NewMessageEvent;
         console.log("message received:", message);
         this.messages.push(message.value);
         this.emit("message");
@@ -24,10 +29,11 @@ class Thread extends EventEmitter {
   }
 
   newMessage(message: string) {
-    this.connetion.send({
+    const createMessage = {
       ev: "CREATE_MESSAGE",
       value: message
-    });
+    };
+    this.connetion.send(JSON.stringify(createMessage));
   }
 }
 
