@@ -1,7 +1,7 @@
 import * as React from "react";
 import thread from "../thread";
 
-const MessageView = (props: any) => {
+const MessageView = (props: {message: string}) => {
   return <div class="message">{props.message}</div>;
 }
 
