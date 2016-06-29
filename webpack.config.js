@@ -17,6 +17,10 @@ module.exports = {
         test: /\.tsx?$/,
         loader: "babel-loader?presets[]=es2016!ts-loader",
       },
+      {
+        test: /\.scss$/,
+        loader: "style-loader!css-loader!sass-loader"
+      },
     ],
   },
 };
