@@ -29,7 +29,7 @@ class Thread extends EventEmitter {
   }
 
   newMessage(message: string) {
-    const createMessage = {
+    const createMessage: CreateMessageEvent = {
       ev: "CREATE_MESSAGE",
       value: message
     };
