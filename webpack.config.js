@@ -3,7 +3,7 @@
 const webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/index.ts",
+  entry: "./src/index.tsx",
   output: {
     path: "./dist",
     filename: "bundle.js"
@@ -14,7 +14,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         loader: "babel-loader?presets[]=es2016!ts-loader",
       },
     ],
