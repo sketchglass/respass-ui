@@ -32,7 +32,7 @@ class ThreadView extends React.Component<{}, ThreadViewState> {
   constructor() {
     super();
     this.state = {
-      messages: ["foo", "bar"]
+      messages: []
     };
     thread.on("message", () => {
       const {messages} = thread;
