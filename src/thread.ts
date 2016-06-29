@@ -1,5 +1,10 @@
 import {EventEmitter} from "events";
 
+interface MessageEvent {
+  ev: "NEW_MESSAGE";
+  value: string;
+}
+
 class Thread extends EventEmitter {
   connetion = new WebSocket("ws://localhost:8080");
   messages: string[] = [];
@@ -7,15 +12,22 @@ class Thread extends EventEmitter {
   constructor() {
     super();
     this.connetion.onmessage = (event) => {
-      const message = event.data;
-      console.log("message received:", message);
-      this.messages.push(message);
-      this.emit("message");
+      try {
+        const message = JSON.parse(event.data) as MessageEvent;
+        console.log("message received:", message);
+        this.messages.push(message.value);
+        this.emit("message");
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
   newMessage(message: string) {
-    this.connetion.send(message);
+    this.connetion.send({
+      ev: "CREATE_MESSAGE",
+      value: message
+    });
   }
 }
 
