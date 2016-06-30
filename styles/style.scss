@@ -1,4 +1,20 @@
 
+.thread {
+  margin: 20px;
+}
+
+.messages {
+  margin-bottom: 10px;
+}
+
+.message {
+  margin: 10px 0;
+
+  .user {
+    color: gray;
+  }
+}
+
 .message-form {
   width: 200px;
   resize: none;
