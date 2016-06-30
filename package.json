@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch -d"
+    "watch": "webpack --watch -d",
+    "start": "node -e 'require(`open`)(`dist/index.html`)' && npm run watch"
   },
   "author": "",
   "license": "MIT",
@@ -16,6 +17,7 @@
     "babel-preset-es2016": "^6.11.0",
     "css-loader": "^0.23.1",
     "node-sass": "^3.8.0",
+    "open": "0.0.5",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
