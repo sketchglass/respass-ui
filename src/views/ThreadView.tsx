@@ -1,7 +1,9 @@
 import * as React from "react";
 import thread from "../thread";
 
-const MessageView = (message: string) => <div class="message">{message}</div>;
+const MessageView = (props: {message: string}) => {
+  return <div class="message">{props.message}</div>;
+}
 
 class MessageForm extends React.Component<{}, {}> {
   render() {
@@ -45,7 +47,7 @@ class ThreadView extends React.Component<{}, ThreadViewState> {
     return (
       <div className="thread">
         <div className="messages">
-          {messages.map(MessageView)}
+          {messages.map((msg, i) => {return <MessageView key={i} message={msg} />})}
         </div>
         <MessageForm />
       </div>
