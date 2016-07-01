@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch -d",
-    "start": "node -e 'require(`open`)(`dist/index.html`)' && npm run watch"
+    "watch": "webpack-dev-server",
+    "open-browser": "node -e 'setTimeout(function(){require(`open`)(`http://localhost:23000/webpack-dev-server/`)}, 2000)'",
+    "start": "npm-run-all --parallel open-browser watch"
   },
   "author": "",
   "license": "MIT",
@@ -17,6 +18,7 @@
     "babel-preset-es2016": "^6.11.0",
     "css-loader": "^0.23.1",
     "node-sass": "^3.8.0",
+    "npm-run-all": "^2.3.0",
     "open": "0.0.5",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
