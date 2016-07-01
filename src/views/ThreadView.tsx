@@ -31,7 +31,8 @@ class MessageForm extends React.Component<{}, {}> {
 }
 
 interface ThreadViewState {
-  messages: Message[];
+  messages?: Message[],
+  connection_number?: number;
 }
 
 export default
@@ -40,11 +41,16 @@ class ThreadView extends React.Component<{}, ThreadViewState> {
   constructor() {
     super();
     this.state = {
-      messages: []
+      messages: [],
+      connection_number: 0
     };
     thread.on("message", () => {
       const {messages} = thread;
       this.setState({messages});
+    });
+    thread.on("connection_update", () => {
+      const {connection_number} = thread;
+      this.setState({connection_number});
     });
   }
 
@@ -52,6 +58,7 @@ class ThreadView extends React.Component<{}, ThreadViewState> {
     const {messages} = this.state;
     return (
       <div className="thread">
+        <div className="connections">{this.state.connection_number}</div>
         <div className="messages">
           {messages.map((msg, i) => <MessageView key={i} message={msg} />)}
         </div>

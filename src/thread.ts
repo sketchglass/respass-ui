@@ -22,6 +22,7 @@ export
 class Thread extends EventEmitter {
   connetion = new WebSocket("ws://localhost:8080");
   messages: Message[] = [];
+  connection_number: number = 0
 
   constructor() {
     super();
@@ -34,6 +35,12 @@ class Thread extends EventEmitter {
           console.log("message received:", message);
           this.messages.push(message.value);
           this.emit("message");
+          break;
+        case "USER_JOIN":
+        case "USER_LEAVE":
+          const connection_number = message.value.connections
+          this.connection_number = connection_number
+          this.emit("connection_update")
           break;
         default:
           break;
